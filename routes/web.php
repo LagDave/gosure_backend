@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,3 +21,8 @@ Route::get('/', function () {
 Route::get('/test', function () {
     return 'Welcome to laravel 10 on hostinger';
 });
+
+Route::get('/auth/google', [AuthController::class, 'redirectToGoogle']);
+Route::get('/auth/logout', [AuthController::class, 'logout']);
+Route::get('/auth/google/callback', [AuthController::class, 'handleGoogleCallback']);
+Route::get('/dashboard', [AuthController::class, 'displayUser']);
