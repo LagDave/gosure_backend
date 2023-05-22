@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +16,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+
+
+Route::controller(AuthController::class)->prefix('auth')->group(function() {
+
+    Route::get('getGoogleRedirectURL', 'getGoogleRedirectURL');
+    Route::get('google/loginUser', 'loginUser');
+    Route::middleware('auth:sanctum')->get('logoutUser', [AuthController::class, 'logoutUser']);
+
+});
+
+Route::middleware('auth:sanctum')->controller(UserController::class)->prefix('user')->group(function() {
+
+    Route::get('getActiveUser', 'getActiveUser');
+
 });
