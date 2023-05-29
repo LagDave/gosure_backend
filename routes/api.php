@@ -22,7 +22,7 @@ Route::controller(AuthController::class)->prefix('auth')->group(function() {
 
     Route::get('getGoogleRedirectURL', 'getGoogleRedirectURL');
     Route::get('google/loginUser', 'loginUser');
-    Route::middleware('auth:sanctum')->get('logoutUser', [AuthController::class, 'logoutUser']);
+    Route::get('logoutUser', 'logoutUser');
 
 });
 
